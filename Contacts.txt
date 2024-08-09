@@ -1,0 +1,21 @@
+Contact ID: 001
+Name: Kevin
+Phone Number -> Mobile: (777) 333-1111
+Phone Number -> Work: None
+Email Address: example@example.com
+Birthday: 1983-10-19
+Category: Friend, Work
+Favorite Color: Blue
+Anniversary: 2022-07-04
+Notes: vapes, drinks, keto
+
+Contact ID: 002
+Name: Taylor
+Phone Number -> Mobile: None
+Phone Number -> Work: (111) 333-7777
+Email Address: example@example.com
+Birthday: 1992-08-20
+Category: Friend, Family
+Favorite Color: Red
+Anniversary: 2022-07-04
+Notes: vapes, keto

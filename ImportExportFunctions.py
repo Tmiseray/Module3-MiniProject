@@ -29,6 +29,7 @@ def export_contacts_to_text(contacts):
 def import_contacts_from_text(contacts = None):
     if contacts is None:
         contacts = {}
+
     try:
         with open('Contacts.txt', 'r') as file:
             contact_id = None
@@ -41,11 +42,14 @@ def import_contacts_from_text(contacts = None):
                         info = {}
                     contact_id = line.split(": ", 1)[1]
                 elif " -> " in line:
-                    outer_key, rest = line.split(" -> ")
-                    sub_key, sub_value = rest.split(": ", 1)
-                    if outer_key not in info:
-                        info[outer_key] = {}
-                    info[outer_key][sub_key] = sub_value
+                    try:
+                        outer_key, rest = line.split(" -> ")
+                        sub_key, sub_value = rest.split(": ", 1)
+                        if outer_key not in info:
+                            info[outer_key] = {}
+                        info[outer_key][sub_key] = sub_value
+                    except ValueError:
+                        print(f"Error parsing line: {line}")
                 elif ": " in line:
                     key, value = line.split(": ", 1)
                     if "," in value:
@@ -53,6 +57,9 @@ def import_contacts_from_text(contacts = None):
                         info[key] = [val.strip() for val in value.split(',')]
                     else:
                         info[key] = value
+                else:
+                    print(f"Unexpected line format: {line}")
+
             if contact_id is not None:
                 contacts[contact_id] = info
         print("Contacts successfully imported from 'Contacts.txt'.")
@@ -60,4 +67,5 @@ def import_contacts_from_text(contacts = None):
         print("The file 'Contacts.txt' was not found")
     except Exception as e:
         print(f"An error occurred: {e}")
+        
     return contacts

@@ -23,10 +23,15 @@ from EditContactFunctions import edit_contact, delete_contact
 
 
 def menu():
-    contacts = import_contacts_from_text('Contacts.txt')
+    contacts = {}
+    try:
+        contacts = import_contacts_from_text('Contacts.txt')
+    except Exception as e:
+        print(f"Error importing contacts: {e}")
+
     title = ".~* Menu: *~."
     while True:
-        print(f"\n{title.center(45)}") # 45
+        print(f"\n{title.center(25)}") # centered 25 chars
         print("1. Add a New Contact")
         print("2. Edit an Existing Contact")
         print("3. Delete a Contact")
@@ -41,46 +46,30 @@ def menu():
             choice = int(user_input)
         except ValueError:
             print("\nNot a valid choice. Please enter the digit that corresponds with your selection.")
-            menu()
+            continue
         except TypeError:
             print("\nAn unexpected type error occurred. Please try again.")
-            menu()
+            continue
         else:
             if choice == 1:
                 add_new_contact(contacts)
-                menu()
-                pass
             elif choice == 2:
                 edit_contact(contacts)
-                menu()
-                pass
             elif choice == 3:
                 delete_contact(contacts)
-                menu()
-                pass
             elif choice == 4:
                 search_contacts(contacts)
-                menu()
-                pass
             elif choice == 5:
                 display_contacts(contacts)
-                menu()
-                pass
             elif choice == 6:
                 export_contacts_to_text(contacts)
-                menu()
-                pass
             elif choice == 7:
                 import_contacts_from_text(contacts)
-                menu()
-                pass
             elif choice == 8:
                 restore_contacts_backup(contacts)
-                menu()
-                pass
             elif choice == 9:
                 print("Thank you for using Contact Management System!")
-                break
+                return contacts
             else:
                 print("\nInvalid choice. Please try again.")
-                menu()
+
