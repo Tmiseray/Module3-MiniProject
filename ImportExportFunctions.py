@@ -1,9 +1,6 @@
 # Import/Export Functions
 
 
-import re
-import os
-
 
 # 6. Export Contacts to a Text File
 # Export to text file in a structured format
@@ -12,12 +9,16 @@ def export_contacts_to_text(contacts):
         with open('Contacts.txt', 'a') as file:
             for contact_id, info in contacts.items():
                 file.write(f"Contact ID: {contact_id}\n")
-                file.write(f"Name: {info['Name']}\n")
-                file.write(f"Phone Number : {info['Phone Number']}\n")
-                file.write(f"Email Address: {info['Email Address']}\n")
-                file.write(f"Birthday: {info['Birthday']}\n")
-                file.write(f"Category: {info['Category']}\n")
+                for key, value in info.items():
+                    if isinstance(value, dict):
+                        for sub_key, sub_value in value.items():
+                            file.write(f"{key} -> {sub_key}: {sub_value}\n")
+                    elif isinstance(value, list):
+                        file.write(f"{key}: {', '.join(value)}\n")
+                    else:
+                        file.write(f"{key}: {value}\n")
                 file.write("\n")
+        print("Contacts successfully exported to 'Contacts.txt'.")
     except Exception as e:
         print(f"An error occurred: {e}")
 
@@ -28,30 +29,35 @@ def export_contacts_to_text(contacts):
 def import_contacts_from_text(contacts = None):
     if contacts is None:
         contacts = {}
-        try:
-            with open('Contacts.txt', 'r') as file:
-                contact_id = None
-                info = {}
-                for line in file:
-                    line = line.strip()
-                    if line.startswith("Contact ID:"):
-                        if contact_id is not None:
-                            contacts[contact_id] = info
-                            info = {}
-                        contact_id = line.split(": ", 1)[1]
-                    elif line.startswith("Name:"):
-                        info['Name'] = line.split(": ", 1)[1]
-                    elif line.startswith("Phone Number:"):
-                        info['Phone Number'] = line.split(": ", 1)[1]
-                    elif line.startswith("Email Address:"):
-                        info['Email Address'] = line.split(": ", 1)[1]
-                    elif line.startswith("Birthday:"):
-                        info['Birthday'] = line.split(": ", 1)[1]
-                    elif line.startswith("Category:"):
-                        info['Category'] = line.split(": ", 1)[1]
-                if contact_id is not None:
-                    contacts[contact_id] = info
-        except FileNotFoundError:
-            print("The file 'Contacts.txt' was not found")
-        except Exception as e:
-            print(f"An error occurred: {e}")
+    try:
+        with open('Contacts.txt', 'r') as file:
+            contact_id = None
+            info = {}
+            for line in file:
+                line = line.strip()
+                if line.startswith("Contact ID:"):
+                    if contact_id is not None:
+                        contacts[contact_id] = info
+                        info = {}
+                    contact_id = line.split(": ", 1)[1]
+                elif " -> " in line:
+                    outer_key, rest = line.split(" -> ")
+                    sub_key, sub_value = rest.split(": ", 1)
+                    if outer_key not in info:
+                        info[outer_key] = {}
+                    info[outer_key][sub_key] = sub_value
+                elif ": " in line:
+                    key, value = line.split(": ", 1)
+                    if "," in value:
+                        # Handling lists
+                        info[key] = [val.strip() for val in value.split(',')]
+                    else:
+                        info[key] = value
+            if contact_id is not None:
+                contacts[contact_id] = info
+        print("Contacts successfully imported from 'Contacts.txt'.")
+    except FileNotFoundError:
+        print("The file 'Contacts.txt' was not found")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    return contacts

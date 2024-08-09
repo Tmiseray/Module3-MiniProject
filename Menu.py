@@ -13,14 +13,13 @@
 # Implement input validation using regular expressions (regex) to ensure correct formatting of contact information
 # Apply error handling using try, except, else, and finally blocks to manage unexpected issues during execution
 
-import re
-import os
-from MenuFunctions import *
-from SearchFunction import *
-from DisplayContactsFunction import *
-from ImportExportFunctions import *
-from BackupFunctions import *
 
+from AddContactFunction import *
+from SearchFunction import search_contacts
+from DisplayContactsFunction import display_contacts
+from ImportExportFunctions import import_contacts_from_text, export_contacts_to_text
+from BackupFunctions import restore_contacts_backup
+from EditContactFunctions import edit_contact, delete_contact
 
 
 def menu():

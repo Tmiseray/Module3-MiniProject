@@ -1,10 +1,11 @@
 # Display Welcome message
 # Welcome to the Contact Management System! 
 
-import re
-from MenuFunctions import *
-from Menu import *
+
+from Menu import menu
 import Menu
+from BackupFunctions import create_contacts_backup
+
 
 def contact_management_system():
     print("\n* Welcome to the Contact Management System! *")

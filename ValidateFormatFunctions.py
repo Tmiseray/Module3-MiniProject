@@ -6,7 +6,6 @@
 
 
 import re
-import os
 
 
 def validate_phone_number(phone_number):
@@ -57,3 +56,40 @@ def format_birthday(birthday):
     #     return formatted_birthday
     else:
         return birthday
+    
+
+def validate_and_format_input(inner_key, value):
+    if inner_key == 'Phone Number':
+        if validate_phone_number(value):
+            return value
+        else:
+            formatted_value = format_phone_number(value)
+            if validate_phone_number(formatted_value):
+                return formatted_value
+            else:
+                print("\nInvalid phone number format.")
+                print("Please use (XXX) XXX-XXXX.")
+                return None
+            
+    elif inner_key == 'Email Address':
+        if validate_email(value):
+            return value
+        else:
+            print("\nInvalid email address format.")
+            print("Please try again.")
+            return None
+        
+    elif inner_key == 'Birthday':
+        if validate_birthday(value):
+            return value
+        else:
+            formatted_value = format_birthday(value)
+            if validate_birthday(formatted_value):
+                return formatted_value
+            else:
+                print("\nInvalid birthday format.")
+                print("Please use YYYY-MM-DD.")
+                return None
+            
+    else:
+        return value

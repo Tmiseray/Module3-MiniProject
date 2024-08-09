@@ -5,58 +5,73 @@
     # Displaying Contacts with/without Sort
 
 
-import re
-import os
-
-
 # 5. Display All Contacts
 # Display each contact and all details
 # *BONUS* Implement sorting options to display contacts alphabetically or other criteria
 
-def get_user_sort_key():
-    print("\n* Sorting options: *")
-    print("1. Name")
-    print("2. Phone Number")
-    print("3. Email Address")
-    print("4. Birthday")
-    print("5. Category")
-    choice = input("Enter the number associated with the sorting option: ").strip()
+def get_user_sort_key(contacts):
+    # Generate sorting options dynamically based on the first contact's keys
+    if contacts:
+        example_contact = next(iter(contacts.values()))
+    else:
+        example_contact = {}
 
-    sort_keys = {
-        '1': 'Name',
-        '2': 'Phone Number',
-        '3': 'Email Address',
-        '4': 'Birthday',
-        '5': 'Category'
-    }
+    print("\n* Sorting options: *")
+    sort_keys = {}
+    option_number = 1
+
+    # Ensuring nested dictionary keys are being used for sort options
+    for outer_key, inner_dict in example_contact.items():
+        if isinstance(inner_dict, dict):
+            for inner_key in inner_dict.keys():
+                print(f"{option_number}. {outer_key} -> {inner_key}")
+                sort_keys[str(option_number)] = (outer_key, inner_key)
+                option_number += 1
+        else:
+            print(f"{option_number}. {outer_key}")
+            sort_keys[str(option_number)] = outer_key
+            option_number += 1
+
+    choice = input("Enter the number associated with the sorting option: ").strip()
 
     return sort_keys.get(choice, 'Name')
 
+
 def sort_contacts_by_key(contacts, sort_key):
     contact_items = list(contacts.items())
-    sorted_contacts = sorted(contact_items, key=lambda item: item[1].get(sort_key, ''))
+
+    # Handle sorting by a nested key if 'sort_key' is a tuple
+    if isinstance(sort_key, tuple):
+        outer_key, inner_key = sort_key
+        sorted_contacts = sorted(contact_items, key=lambda item: item[1].get(outer_key, {}).get(inner_key, ''))
+    else:
+        sorted_contacts = sorted(contact_items, key=lambda item: item[1].get(sort_key, ''))
+
     return sorted_contacts
+
 
 def display_contacts(contacts):
     sort = input("Would you like to sort the contacts? (yes/no): ").lower()
     if sort == 'yes':
-        sort_key = get_user_sort_key()
+        sort_key = get_user_sort_key(contacts)
         sorted_contacts = sort_contacts_by_key(contacts, sort_key)
         print("\n.~* Full Contacts List: *~.")
         print(f"* Sorted By: {sort_key} *")
         for contact_id, info in sorted_contacts.items():
             print(f"\nContact ID: {contact_id}")
-            print(f"Name: {info['Name']}")
-            print(f"Phone Number: {info['Phone Number']}")
-            print(f"Email Address: {info['Email Address']}")
-            print(f"Birthday: {info['Birthday']}")
-            print(f"Category: {info['Category']}")
+            display_contact_info(info)
     else:
         print("\n.~* Full Contacts List: *~.")
         for contact_id, info in contacts.items():
             print(f"\nContact ID: {contact_id}")
-            print(f"Name: {info['Name']}")
-            print(f"Phone Number: {info['Phone Number']}")
-            print(f"Email Address: {info['Email Address']}")
-            print(f"Birthday: {info['Birthday']}")
-            print(f"Category: {info['Category']}")
+            display_contact_info(info)
+
+
+def display_contact_info(info):
+    # recursively display contact info, handling nested dictionaries
+    for key, value in info.items():
+        if isinstance(value, dict):
+            print(f"{key}: ")
+            display_contact_info(value)
+        else:
+            print(f"{key}: {value}")
