@@ -13,7 +13,7 @@ def export_contacts_to_text(contacts):
     try:
         with open('Contacts.txt', 'a') as file:
             for contact_id, info in contacts.items():
-                file.write(f"Contact ID: {contact_id}\n")
+                file.write(f"\nContact ID: {contact_id}\n")
                 for key, value in info.items():
                     if isinstance(value, dict):
                         for sub_key, sub_value in value.items():

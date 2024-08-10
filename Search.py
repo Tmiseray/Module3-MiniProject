@@ -8,8 +8,8 @@
 Have not tested this one due to being stuck on the 'add/edit' issues. But I have used similar logic in other places and may not be a problem.
 """
 
-from AddContactFunction import *
-from ValidateFormatFunctions import *
+from AddContact import *
+from ValidateFormat import *
 
 
 # 4. Search for a Contact
@@ -31,7 +31,7 @@ def get_user_search_key(contacts):
     for outer_key, inner_dict in example_contact.items():
         if isinstance(inner_dict, dict):
             for inner_key in inner_dict.keys():
-                print(f"{option_number}. {outer_key} -> {inner_key}")
+                print(f"{option_number}. {outer_key}: -> {inner_key}")
                 search_keys[str(option_number)] = (outer_key, inner_key)
                 option_number += 1
         else:
@@ -60,7 +60,7 @@ def search_contacts(contacts):
                 found_contacts.append((contact_id, info))
 
     if found_contacts:
-        print(f"\n.~* Search Results for '{search_value}' in '{search_key}': *~.")
+        print(f"\n.~* Search Results for '{search_value.capitalize()}' in '{search_key}': *~.")
         for contact_id, info in found_contacts:
             print(f"\nContact ID: {contact_id}")
             display_contact_info(info)
@@ -68,11 +68,19 @@ def search_contacts(contacts):
         print("\nNo contacts found matching your search criteria.")
 
 
-def display_contact_info(info):
-    # Recursively display contact info, handling nested dictionaries
+def display_contact_info(info, indent_level = 0):
+    # recursively display contact info
+    # Adjust indentation based on level of nesting
+    indent = "    " * indent_level
+
     for key, value in info.items():
         if isinstance(value, dict):
-            print(f"{key}:")
-            display_contact_info(value)
+            # Display key for nested dictionary
+            print(f"{indent}{key}: ")
+            display_contact_info(value, indent_level + 1)
+        elif isinstance(value, list):
+            # Display list values as comma-separated items
+            print(f"{indent}{key}: {', '.join(value)}")
         else:
-            print(f"{key}: {value}")
+            # Only display the key if there is a value
+            print(f"{indent}{key}: {value}")

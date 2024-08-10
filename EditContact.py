@@ -4,7 +4,7 @@
 This one was giving me an issue with the 'edit keys', but now it should show you the info/keys that are in the contact you are looking to edit
 """
 
-from ValidateFormatFunctions import *
+from ValidateFormat import *
 
 
 # 2. Edit an existing Contact

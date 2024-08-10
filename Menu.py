@@ -17,12 +17,12 @@
 No issues here.
 """
 
-from AddContactFunction import *
-from SearchFunction import search_contacts
-from DisplayContactsFunction import display_contacts
-from ImportExportFunctions import import_contacts_from_text, export_contacts_to_text
-from BackupFunctions import restore_contacts_backup
-from EditContactFunctions import edit_contact, delete_contact
+from AddContact import *
+from Search import search_contacts
+from DisplayContacts import display_contacts
+from ImportExport import import_contacts_from_text, export_contacts_to_text
+from Backup import restore_contacts_backup
+from EditContact import edit_contact, delete_contact
 
 
 
@@ -63,9 +63,9 @@ def menu(contacts):
             elif choice == 6:
                 export_contacts_to_text(contacts)
             elif choice == 7:
-                import_contacts_from_text(contacts)
+                contacts = import_contacts_from_text(contacts)
             elif choice == 8:
-                restore_contacts_backup(contacts)
+                contacts = restore_contacts_backup()
             elif choice == 9:
                 print("\nThank you for using Contact Management System!")
                 return contacts

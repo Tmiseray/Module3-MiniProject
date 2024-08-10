@@ -47,9 +47,9 @@ def sort_contacts_by_key(contacts, sort_key):
     # Handle sorting by a nested key if 'sort_key' is a tuple
     if isinstance(sort_key, tuple):
         outer_key, inner_key = sort_key
-        sorted_contacts = sorted(contact_items, key=lambda item: item[1].get(outer_key, {}).get(inner_key, ''))
+        sorted_contacts = dict(sorted(contact_items, key=lambda item: item[1].get(outer_key, {}).get)(inner_key, ''))
     else:
-        sorted_contacts = sorted(contact_items, key=lambda item: item[1].get(sort_key, ''))
+        sorted_contacts = dict(sorted(contact_items, key=lambda item: item[1].get(sort_key, '')))
 
     return sorted_contacts
 

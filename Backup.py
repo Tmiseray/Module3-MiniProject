@@ -24,37 +24,66 @@ def create_contacts_backup(contacts):
                 else:
                     backup.write(f"{key}: {value}\n")
             backup.write("\n")
-    print("\nContacts' backup completed successfully!")
+    print("\nContacts backup completed successfully!")
     print(f"Location: {backup.name}")
 
 
+# def find_latest_backup():
+#     i = 0
+#     while os.path.exists(f"Backups/ContactsBackup{i}.txt"):
+#         i += 1
+#     return f"Backups/ContactsBackup{i - 1}.txt" if i > 0 else None
+
 def find_latest_backup():
+    backup_dir = "Backups"
+    if not os.path.exists(backup_dir):
+        print("Backup directory does not exist.")
+        return None
+    
     i = 0
-    while os.path.exists(f"Backups/ContactsBackup{i}.txt"):
-        i += 1
-    return f"Backups/ContactsBackup{i - 1}.txt" if i > 0 else None
+    latest_backup = None
+
+    while True:
+        backup_path = os.path.join(backup_dir, f"ContactsBackup{i}.txt")
+        if os.path.exists(backup_path):
+            i += 1
+        else:
+            backup_path = os.path.join(backup_dir, f"ContactsBackup{i - 1}.txt")
+            latest_backup = backup_path
+            break
+
+    if latest_backup:
+        print(f"Latest backup found: {latest_backup}")
+        return latest_backup
+    else:
+        print("No backup files found.")
+        return None
 
 
-def restore_contacts_backup(contacts):
+def restore_contacts_backup():
     latest_backup = find_latest_backup()
     if latest_backup:
         contacts = {}
         contact_id = None
         info = {}
+
         with open(latest_backup, "r") as backup_file:
             for line in backup_file:
                 line = line.strip()
+
                 if line.startswith("Contact ID:"):
                     if contact_id is not None:
                             contacts[contact_id] = info
                             info = {}
                     contact_id = line.split(": ", 1)[1]
+
                 elif ": -> " in line:
                     outer_key, rest = line.split(": -> ")
                     sub_key, sub_value = rest.split(": ", 1)
                     if outer_key not in info:
                         info[outer_key] = {}
                     info[outer_key][sub_key] = sub_value
+
                 elif ": " in line:
                     key, value = line.split(": ", 1)
                     if "," in value:
@@ -62,11 +91,13 @@ def restore_contacts_backup(contacts):
                         info[key] = [val.strip() for val in value.split(',')]
                     else:
                         info[key] = value
+
             if contact_id is not None:
                 contacts[contact_id] = info
+
         print(f"Contacts restored from {latest_backup}")
         return contacts
     else:
         print("No backup files found.")
-        return contacts
+        return {}
 

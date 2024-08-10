@@ -11,7 +11,7 @@ I initially had break downs for each contact info/detail in this function, but a
 I do have a commented TODO below in case I think it's better to just keep it simple for adding and give the option to add a custom field in 'edit_contact' instead. Not sure which is best at this point.
 """
 
-from ValidateFormatFunctions import *
+from ValidateFormat import *
 
 
 # 1. Add a New Contact
@@ -32,21 +32,36 @@ def add_new_contact(contacts):
                 # Nested dictionary handling (e.g., Phone Number -> Mobile, Work)
                 new_contact[outer_key] = {}
                 for sub_key in inner_value.keys():
-                    sub_value = input(f"\nEnter the {outer_key} -> {sub_key} (or leave blank): ").strip()
-                    if sub_value:
-                        sub_value = validate_and_format_input(outer_key, sub_value)
-                        new_contact[outer_key][sub_key] = sub_value
+                    if sub_key in new_contact[outer_key].keys():
+                        break
+                    else:
+                        sub_value = input(f"\nEnter the {outer_key} -> {sub_key} (or leave blank): ").strip()
+                        if sub_value:
+                            sub_value = validate_and_format_input(outer_key, sub_value)
+                            new_contact[outer_key][sub_key] = sub_value
+                        else:
+                            new_contact[outer_key][sub_key] = 'None'
             elif isinstance(inner_value, list):
                 # Handling categories or other list-based fields
-                values = input(f"\nEnter {outer_key} (comma-separated, or leave blank for none): ").split(',')
-                unique_values = list(set(val.strip() for val in values if val.strip()))
-                new_contact[outer_key] = unique_values if unique_values else None
+                if outer_key in new_contact.keys():
+                    break
+                else:
+                    values = input(f"\nEnter {outer_key} (comma-separated, or leave blank for none): ").split(',')
+                    unique_values = list(set(val.strip() for val in values if val.strip()))
+                    new_contact[outer_key] = unique_values if unique_values else None
+
             else:
                 # Single value field
-                new_value = input(f"\nEnter the information for {outer_key} (or leave blank): ").strip()
-                if new_value:
-                    new_value = validate_and_format_input(outer_key, new_value)
-                    new_contact[outer_key] = new_value
+                if outer_key in new_contact.keys():
+                    break
+                else:
+                    new_value = input(f"\nEnter the information for {outer_key} (or leave blank): ").strip()
+                    if new_value:
+                        new_value = validate_and_format_input(outer_key, new_value)
+                        new_contact[outer_key] = new_value
+                    else:
+                        new_contact[outer_key] = 'None'
+
 
     # # Handle any custom fields
     # for existing_contact in contacts.values():
