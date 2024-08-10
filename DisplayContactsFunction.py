@@ -67,11 +67,19 @@ def display_contacts(contacts):
             display_contact_info(info)
 
 
-def display_contact_info(info):
-    # recursively display contact info, handling nested dictionaries
+def display_contact_info(info, indent_level = 0):
+    # recursively display contact info
+    # Adjust indentation based on level of nesting
+    indent = "    " * indent_level
+
     for key, value in info.items():
         if isinstance(value, dict):
-            print(f"{key}: ")
-            display_contact_info(value)
+            # Display key for nested dictionary
+            print(f"{indent}{key}: ")
+            display_contact_info(value, indent_level + 1)
+        elif isinstance(value, list):
+            # Display list values as comma-separated items
+            print(f"{indent}{key}: {', '.join(value)}")
         else:
-            print(f"{key}: {value}")
+            # Only display the key if there is a value
+            print(f"{indent}{key}: {value}")

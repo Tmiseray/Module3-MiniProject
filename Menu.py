@@ -22,13 +22,9 @@ from BackupFunctions import restore_contacts_backup
 from EditContactFunctions import edit_contact, delete_contact
 
 
-def menu():
-    contacts = {}
-    try:
-        contacts = import_contacts_from_text('Contacts.txt')
-    except Exception as e:
-        print(f"Error importing contacts: {e}")
 
+
+def menu(contacts):
     title = ".~* Menu: *~."
     while True:
         print(f"\n{title.center(25)}") # centered 25 chars
@@ -68,8 +64,9 @@ def menu():
             elif choice == 8:
                 restore_contacts_backup(contacts)
             elif choice == 9:
-                print("Thank you for using Contact Management System!")
+                print("\nThank you for using Contact Management System!")
                 return contacts
             else:
                 print("\nInvalid choice. Please try again.")
+
 

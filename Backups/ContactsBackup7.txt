@@ -19,3 +19,14 @@ Category: Friend, Family
 Favorite Color: Red
 Anniversary: 2022-07-04
 Notes: vapes, keto
+
+Contact ID: 003
+Name: Maranda
+Phone Number: -> Mobile: (131) 131-1313
+Phone Number: -> Work: (131) 131-1313
+Email Address: email@email.net
+Birthday: None
+Category: Family
+Favorite Color: Black
+Notes: BFF
+

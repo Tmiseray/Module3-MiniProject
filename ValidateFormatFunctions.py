@@ -34,7 +34,7 @@ def validate_birthday(birthday):
 
 
 def format_phone_number(phone_number):
-    numbers = re.sub("\D", "", phone_number)
+    numbers = re.sub(r"\D", "", phone_number)
     pattern1 = r"^[1-9]{3}"
     area_code = re.search(pattern1, numbers).group()
     numbers = numbers[3:]
@@ -43,23 +43,23 @@ def format_phone_number(phone_number):
 
 
 def format_birthday(birthday):
-    # DD.MM.YYYY or DD/MM/YYYY
-    pattern3 = r"((\d{2})\.(\d{2})\.(\d{4})|(\d{2})/(\d{2})/(\d{4}))"
-    # # DD/MM/YYYY
-    # pattern2 = r"(\d{2})/(\d{2})/(\d{4})"
+    # DD.MM.YYYY
+    pattern3 = r"((\d{2})\.(\d{2})\.(\d{4}))"
+    # DD/MM/YYYY
+    pattern2 = r"(\d{2})/(\d{2})/(\d{4})"
     standard = r"\3-\2-\1"
     if re.match(pattern3, birthday):
         formatted_birthday = re.sub(pattern3, standard, birthday)
         return formatted_birthday
-    # elif re.match(pattern2, birthday):
-    #     formatted_birthday = re.sub(pattern2, standard, birthday)
-    #     return formatted_birthday
+    elif re.match(pattern2, birthday):
+        formatted_birthday = re.sub(pattern2, standard, birthday)
+        return formatted_birthday
     else:
         return birthday
     
 
-def validate_and_format_input(inner_key, value):
-    if inner_key == 'Phone Number':
+def validate_and_format_input(key, value):
+    if key == 'Phone Number':
         if validate_phone_number(value):
             return value
         else:
@@ -71,7 +71,7 @@ def validate_and_format_input(inner_key, value):
                 print("Please use (XXX) XXX-XXXX.")
                 return None
             
-    elif inner_key == 'Email Address':
+    elif key == 'Email Address':
         if validate_email(value):
             return value
         else:
@@ -79,7 +79,7 @@ def validate_and_format_input(inner_key, value):
             print("Please try again.")
             return None
         
-    elif inner_key == 'Birthday':
+    elif key == 'Birthday':
         if validate_birthday(value):
             return value
         else:

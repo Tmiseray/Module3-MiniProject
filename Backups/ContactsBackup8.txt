@@ -8,6 +8,7 @@ Category: Friend, Work
 Favorite Color: Blue
 Anniversary: 2022-07-04
 Notes: vapes, drinks, keto
+None: 
 
 Contact ID: 002
 Name: Taylor
@@ -19,3 +20,4 @@ Category: Friend, Family
 Favorite Color: Red
 Anniversary: 2022-07-04
 Notes: vapes, keto
+

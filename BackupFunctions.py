@@ -6,30 +6,30 @@ import os
 
 def create_contacts_backup(contacts):
     i = 0
-    while os.path.exists(f"/Backups/ContactsBackup{i}.txt"):
+    while os.path.exists(f"Backups/ContactsBackup{i}.txt"):
         i +=1
 
-    with open(f"/Backups/ContactsBackup{i}.txt", "w") as backup:
+    with open(f"Backups/ContactsBackup{i}.txt", "w") as backup:
         for contact_id, info in contacts.items():
             backup.write(f"Contact ID: {contact_id}\n")
             for key, value in info.items():
                 if isinstance(value, dict):
                     for sub_key, sub_value in value.items():
-                        backup.write(f"{key} -> {sub_key}: {sub_value}\n")
+                        backup.write(f"{key}: -> {sub_key}: {sub_value}\n")
                 elif isinstance(value, list):
                     backup.write(f"{key}: {', '.join(value)}\n")
                 else:
                     backup.write(f"{key}: {value}\n")
             backup.write("\n")
-    print("Contacts' backup completed successfully!")
-    print(f"Location: {backup}")
+    print("\nContacts' backup completed successfully!")
+    print(f"Location: {backup.name}")
 
 
 def find_latest_backup():
     i = 0
-    while os.path.exists(f"/Backups/ContactsBackup{i}.txt"):
+    while os.path.exists(f"Backups/ContactsBackup{i}.txt"):
         i += 1
-    return f"/Backups/ContactsBackup{i - 1}.txt" if i > 0 else None
+    return f"Backups/ContactsBackup{i - 1}.txt" if i > 0 else None
 
 
 def restore_contacts_backup(contacts):
@@ -46,8 +46,8 @@ def restore_contacts_backup(contacts):
                             contacts[contact_id] = info
                             info = {}
                     contact_id = line.split(": ", 1)[1]
-                elif " -> " in line:
-                    outer_key, rest = line.split(" -> ")
+                elif ": -> " in line:
+                    outer_key, rest = line.split(": -> ")
                     sub_key, sub_value = rest.split(": ", 1)
                     if outer_key not in info:
                         info[outer_key] = {}

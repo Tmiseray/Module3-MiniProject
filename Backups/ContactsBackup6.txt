@@ -19,3 +19,14 @@ Category: Friend, Family
 Favorite Color: Red
 Anniversary: 2022-07-04
 Notes: vapes, keto
+
+Contact ID: 003
+Name: Maranda
+Email Address: email@email.org
+Birthday: None
+Category: None
+Favorite Color: Black
+Notes: None
+Anniversary: None
+None: 
+

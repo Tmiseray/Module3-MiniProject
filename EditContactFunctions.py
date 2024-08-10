@@ -54,24 +54,6 @@ def edit_contact(contacts):
                             print("\nInvalid phone number format.")
                             print("Please use (XXX) XXX-XXXX.")
                             return
-                elif outer_key == 'Email Address':
-                    if validate_email(new_value):
-                        info[outer_key][inner_key] = new_value
-                    else:
-                        print("\nInvalid email address format.")
-                        print("Please try again.")
-                        return
-                elif outer_key == 'Birthday':
-                    if validate_birthday(new_value):
-                        info[outer_key][inner_key] = new_value
-                    else:
-                        formatted_birthday = format_birthday(new_value)
-                        if validate_birthday(formatted_birthday):
-                            info[outer_key][inner_key] = formatted_birthday
-                        else:
-                            print("\nInvalid birthday format.")
-                            print("Please use YYYY-MM-DD.")
-                            return
                 else:
                     info[outer_key][inner_key] = new_value
             else:
@@ -114,7 +96,6 @@ def edit_contact(contacts):
             return
         else:
             print("\nContact not found.")
-    pass
 
 
 # 3. Delete a Contact
@@ -126,7 +107,6 @@ def delete_contact(contacts):
             print(f"\nContact: {user_input} has been deleted from contacts.")
         else:
             print(f"\nContact: {user_input} does not exist in contacts.")
-    pass
 
 
 
