@@ -13,9 +13,6 @@
 # Implement input validation using regular expressions (regex) to ensure correct formatting of contact information
 # Apply error handling using try, except, else, and finally blocks to manage unexpected issues during execution
 
-"""
-No issues here.
-"""
 
 from AddContact import *
 from Search import search_contacts
@@ -23,8 +20,6 @@ from DisplayContacts import display_contacts
 from ImportExport import import_contacts_from_text, export_contacts_to_text
 from Backup import restore_contacts_backup
 from EditContact import edit_contact, delete_contact
-
-
 
 
 def menu(contacts):

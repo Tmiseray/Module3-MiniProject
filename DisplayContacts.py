@@ -4,10 +4,6 @@
     # Sorting Contacts by User's Sort Key
     # Displaying Contacts with/without Sort
 
-"""
-I did have a couple hiccups here when displaying all contact info, but it had to do with 'import' and 'display_info' which should be fixed.
-Have not attempted sort due to being stuck in add/edit contact
-"""
 
 # 5. Display All Contacts
 # Display each contact and all details

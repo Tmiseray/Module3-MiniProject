@@ -1,8 +1,5 @@
 # Backup and Restore (Bonus): Add features to create automatic backups of contact data and the ability to restore data from a backup file.
-"""
-Backups are doing great!
-Although I have not attempted restoring from backup yet, due to the issues with adding/editing contacts.
-"""
+
 
 import os
 
@@ -27,12 +24,6 @@ def create_contacts_backup(contacts):
     print("\nContacts backup completed successfully!")
     print(f"Location: {backup.name}")
 
-
-# def find_latest_backup():
-#     i = 0
-#     while os.path.exists(f"Backups/ContactsBackup{i}.txt"):
-#         i += 1
-#     return f"Backups/ContactsBackup{i - 1}.txt" if i > 0 else None
 
 def find_latest_backup():
     backup_dir = "Backups"

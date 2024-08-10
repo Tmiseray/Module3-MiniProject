@@ -1,8 +1,6 @@
 # Edit Functions
 # Including:
-"""
-This one was giving me an issue with the 'edit keys', but now it should show you the info/keys that are in the contact you are looking to edit
-"""
+
 
 from ValidateFormat import *
 
@@ -98,6 +96,7 @@ def edit_contact(contacts):
             return
         else:
             print("\nContact not found.")
+            return
 
 
 # 3. Delete a Contact
