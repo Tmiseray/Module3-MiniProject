@@ -4,6 +4,9 @@
     # Search Contacts by User's Search Key
     # Displaying Contacts Matching User's Search Criteria
 
+"""
+Have not tested this one due to being stuck on the 'add/edit' issues. But I have used similar logic in other places and may not be a problem.
+"""
 
 from AddContactFunction import *
 from ValidateFormatFunctions import *

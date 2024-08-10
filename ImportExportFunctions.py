@@ -1,4 +1,9 @@
 # Import/Export Functions
+"""
+import function works great. I had a couple issues with it at first. It kept giving an error without an actual error that took place. Should be fixed.
+
+export has not been attempted due to issues with add/edit contact
+"""
 
 import re
 

@@ -1,6 +1,12 @@
 # Display Welcome message
 # Welcome to the Contact Management System! 
 
+"""
+No issues here.
+There is a test version for 'contacts.txt' that I have been using to ensure things are functioning.
+The 'create_contacts_backup' works great. I've been able to use it to help troubleshoot some of the initial issues.
+"""
+
 from ImportExportFunctions import import_contacts_from_text
 from BackupFunctions import create_contacts_backup
 from Menu import menu

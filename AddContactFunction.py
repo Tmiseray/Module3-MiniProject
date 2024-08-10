@@ -1,7 +1,15 @@
 # Add New Contact Function
 # Includes:
 # 
+"""
+I initially had break downs for each contact info/detail in this function, but after adjusting the 'ImportExportFunctions.py' and 'BackupFunctions.py' I realized there may be info sections that are introduced by the user. I made this one flow to ask for input/value for each contact info/key that already exists based on other contacts. The process continued to cause issues including:
+- Asking multiple times for the same input
+    - when this happens, it also will overwrite the input/value entered
+- Occasionally giving an error for invalid format for birthday
+- Creating a 'None' info/key
 
+I do have a commented TODO below in case I think it's better to just keep it simple for adding and give the option to add a custom field in 'edit_contact' instead. Not sure which is best at this point.
+"""
 
 from ValidateFormatFunctions import *
 

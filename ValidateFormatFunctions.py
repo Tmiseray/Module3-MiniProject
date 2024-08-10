@@ -4,6 +4,9 @@
     # Validating Email Address
     # Formatting Phone Number
 
+"""
+These functions should be fine now. I was having an issue with the dates validating, but using 2 patterns vs combining seemed to do the trick.
+"""
 
 import re
 

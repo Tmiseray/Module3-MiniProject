@@ -1,5 +1,8 @@
 # Backup and Restore (Bonus): Add features to create automatic backups of contact data and the ability to restore data from a backup file.
-
+"""
+Backups are doing great!
+Although I have not attempted restoring from backup yet, due to the issues with adding/editing contacts.
+"""
 
 import os
 

@@ -13,6 +13,9 @@
 # Implement input validation using regular expressions (regex) to ensure correct formatting of contact information
 # Apply error handling using try, except, else, and finally blocks to manage unexpected issues during execution
 
+"""
+No issues here.
+"""
 
 from AddContactFunction import *
 from SearchFunction import search_contacts

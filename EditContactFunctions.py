@@ -1,6 +1,8 @@
 # Edit Functions
 # Including:
-
+"""
+This one was giving me an issue with the 'edit keys', but now it should show you the info/keys that are in the contact you are looking to edit
+"""
 
 from ValidateFormatFunctions import *
 
@@ -19,7 +21,7 @@ def get_user_edit_key(contact_info):
     for outer_key, inner_dict in contact_info.items():
         if isinstance(inner_dict, dict):
             for inner_key in inner_dict.keys():
-                print(f"{option_number}. {outer_key} -> {inner_key}")
+                print(f"{option_number}. {outer_key}: -> {inner_key}")
                 edit_keys[str(option_number)] = (outer_key, inner_key)
                 option_number += 1
         else:
