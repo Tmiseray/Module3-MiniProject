@@ -1,6 +1,10 @@
 # Add New Contact Function
 # Includes:
-# 
+    # Creating a new contact ID (unique identifier) based on the existing contacts data
+    # Gives the user field options based on the existing contacts information/data
+    # Gives the user an additonal option for a custom field they can title and add input value for
+    # Handles validation and formatting for user inputs that are phone numbers, emails, and birthdates
+
 
 
 from ValidateFormat import *
@@ -53,8 +57,18 @@ def add_new_contact(contacts):
                         new_contact[outer_key] = new_value
                     else:
                         new_contact[outer_key] = 'None'
+        custom_choice = input("Would you like to add a custom field? (yes/no): ")
+        if custom_choice == 'yes':
+            custom_field = input("Enter the name for the custom field: ").strip()
+            custom_value = input(f"Enter the value for {custom_field}: ").strip()
+            new_contact[custom_field] = custom_value
+
+        else:
+            break
 
     contacts[new_contact_ID] = new_contact
     print(f"\nNew Contact Added: '{new_contact.get('Name', 'Unnamed Contact')}'")
     print(f"With Unique ID: {new_contact_ID}")
+    return contacts
 
+# TODO Attempt to add custom field, if so add custom field with default None to all other contacts

@@ -3,6 +3,7 @@
     # Sort Key from User and if not Default
     # Sorting Contacts by User's Sort Key
     # Displaying Contacts with/without Sort
+    # Recursively displays contact's info and applies indentations for nested info based on the level of nesting, making the display more user-friendly
 
 
 # 5. Display All Contacts
