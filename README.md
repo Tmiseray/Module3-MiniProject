@@ -18,9 +18,9 @@ Contact Management System is a command-line-based application to simplify the ma
 
 ### Initial Menu (Menu.py) & Actions:
 * User-friendly formatted menu with detailed options to choose from including:
-1. Add a New Contact
-2. Edit an Existing Contact
-3. Delete a Contact
+    1. Add a New Contact
+    2. Edit an Existing Contact
+    3. Delete a Contact
 4. Search for a Contact
 5. Display All Contacts
 6. Export Contacts to a Text File
