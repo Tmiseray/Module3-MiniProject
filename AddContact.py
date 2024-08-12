@@ -61,6 +61,9 @@ def add_new_contact(contacts):
         if custom_choice == 'yes':
             custom_field = input("Enter the name for the custom field: ").strip()
             custom_value = input(f"Enter the value for {custom_field}: ").strip()
+            for contact in contacts.values():
+                    if custom_field not in contact:
+                        contact[custom_field] = 'None'
             new_contact[custom_field] = custom_value
 
         else:

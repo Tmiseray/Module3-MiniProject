@@ -38,9 +38,12 @@ def get_user_edit_key(contact_info):
 
 
 def edit_contact(contacts):
-    user_input = input("\nEnter the name of the contact to edit: ")
+    user_input = input("\nEnter the name of the contact to edit: ").strip()
+    contact_found = False
+
     for contact_id, info in contacts.items():
-        if info['Name'] == user_input.lower():
+        if info['Name'].lower() == user_input.lower():
+            contact_found = True
             print(f"\n* Editing Contact: {user_input} *")
             edit_key = get_user_edit_key(info)
 
@@ -64,12 +67,14 @@ def edit_contact(contacts):
             elif edit_key not in info:
                 custom_key = input("Enter the name of the custom field: ").strip()
                 custom_value = input(f"Enter the information for {custom_key}: ").strip()
-                info[custom_key] = custom_value
                 # TODO when adding custom field, ensure all other ocntacts are updated with field and None as default value
+                for contact in contacts.values():
+                    if custom_key not in contact:
+                        contact[custom_key] = 'None'
 
+                info[custom_key] = custom_value
             else:
                 new_value = input(f"Enter the new information for {edit_key}: ").strip()
-
                 # Validate and Format input based on 'edit_key'
                 if edit_key == 'Phone Number':
                     if validate_phone_number(new_value):
@@ -104,10 +109,11 @@ def edit_contact(contacts):
                     info[edit_key] = new_value
 
             print(f"\nContact '{info['Name']}' has been updated.")
-            return contacts
-        else:
+            break
+
+    if not contact_found:
             print("\nContact not found.")
-            return
+    return contacts
 
 
 # 3. Delete a Contact

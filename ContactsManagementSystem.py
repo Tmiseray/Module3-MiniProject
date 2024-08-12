@@ -11,7 +11,7 @@ def contact_management_system():
     print("\n* Welcome to the Contact Management System! *")
     contacts = {}
     try:
-        contacts = import_contacts_from_text()
+        contacts = import_contacts_from_text(contacts)
         menu(contacts)
     except Exception as e:
         print(f"An error occurred: {e}")
