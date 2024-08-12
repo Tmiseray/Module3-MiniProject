@@ -4,13 +4,10 @@
     # Search Contacts by User's Search Key
     # Displaying Contacts Matching User's Search Criteria
 
-"""
-Have not tested this one due to being stuck on the 'add/edit' issues. But I have used similar logic in other places and may not be a problem.
-"""
 
 from AddContact import *
 from ValidateFormat import *
-
+from DisplayContacts import display_contact_info
 
 # 4. Search for a Contact
 # Search for contact and display details
@@ -66,21 +63,3 @@ def search_contacts(contacts):
             display_contact_info(info)
     else:
         print("\nNo contacts found matching your search criteria.")
-
-
-def display_contact_info(info, indent_level = 0):
-    # recursively display contact info
-    # Adjust indentation based on level of nesting
-    indent = "    " * indent_level
-
-    for key, value in info.items():
-        if isinstance(value, dict):
-            # Display key for nested dictionary
-            print(f"{indent}{key}: ")
-            display_contact_info(value, indent_level + 1)
-        elif isinstance(value, list):
-            # Display list values as comma-separated items
-            print(f"{indent}{key}: {', '.join(value)}")
-        else:
-            # Only display the key if there is a value
-            print(f"{indent}{key}: {value}")

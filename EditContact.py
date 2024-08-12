@@ -49,7 +49,7 @@ def edit_contact(contacts):
 
             if isinstance(edit_key, tuple):
                 outer_key, inner_key = edit_key
-                new_value = input(f"Enter the new information for {outer_key} -> {inner_key}: ").strip()
+                new_value = input(f"Enter the new information for {outer_key}: -> {inner_key}: ").strip()
                 # Validate and Format input based on 'edit_key'
                 if outer_key == 'Phone Number':
                     if validate_phone_number(new_value):
@@ -119,14 +119,16 @@ def edit_contact(contacts):
 # 3. Delete a Contact
 def delete_contact(contacts):
     user_input = input("\nEnter the name of the contact you would like to delete: ")
+    contact_found = False
     for contact_id, info in contacts.items():
         if info['Name'].lower() == user_input.lower():
+            contact_found = True
             del contacts[contact_id]
             print(f"\nContact: {user_input} has been deleted from contacts.")
             return contacts
-        else:
-            print(f"\nContact: {user_input} does not exist in contacts.")
-            return
+    if not contact_found:
+        print(f"\nContact: {user_input} does not exist in contacts.")
+        return
 
 
 
