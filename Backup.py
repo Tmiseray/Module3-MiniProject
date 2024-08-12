@@ -63,8 +63,8 @@ def restore_contacts_backup():
 
                 if line.startswith("Contact ID:"):
                     if contact_id is not None:
-                            contacts[contact_id] = info
-                            info = {}
+                        contacts[contact_id] = info
+                        info = {}
                     contact_id = line.split(": ", 1)[1]
 
                 elif ": -> " in line:
