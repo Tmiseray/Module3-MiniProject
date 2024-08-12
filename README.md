@@ -44,13 +44,13 @@ Contact Management System is a command-line-based application to simplify the ma
     - Edit an Existing Contact
     - Delete a Contact
 1. Editing Options Menu:
-    * get_user_edit_key
+    * `get_user_edit_key(contact_info)`
     * This provides a user-friendly, formatted menu to the user for editing options
     * The options are based on the user's selected contact's current fields and lastly a 'Custom Field'.
     * It also has special handling for any nested dictionary keys and ensures they are being used for editing options as well.
     * Asks for user input of the editing option and returns the choice into the edit_contact function
 2. Edit an Existing Contact:
-    * edit_contact
+    * `edit_contact(contacts)`
     * Asks for user input of the name of the contact they would like to edit and iterates through the contacts dictionary for a match
     * If the contact is found, a formatted message ('* Editing Contact: *') is provided to the user and provides the user the 'Editing Options Menu'.
     * Once the user's choice has been returned, it will iterate through the contact's dictionary for the 'edit_key' they chose and ask for another user input of 'Enter the new information for {edit_key}: '
@@ -64,7 +64,7 @@ Contact Management System is a command-line-based application to simplify the ma
             * These features will be discussed in detail further in the README
     * Finally, the application provides a confirmation message 'Contact '{info['Name']}' has been updated.' or if the contact was not found provides 'Contact not found.'
 3. Delete a Contact:
-    * delete_contact
+    * `delete_contact(contacts)`
     * Asks for user input 'Enter the name of the contact you would like to delete: '
     * If the contact is found, the contact is deleted and the user is provided a confirmation message 'Contact: {user_input} has been deleted from contacts.'
     * If the contact is not found, the user is provided another message 'Contact: {user_input} does not exist in contacts.'
@@ -74,14 +74,14 @@ Contact Management System is a command-line-based application to simplify the ma
     - Search Options Menu
     - Search for a Contact
 1. Search Options Menu:
-    * get_user_search_key
+    * `get_user_search_key(contacts)`
     * Generates search options based on the first contact's keys
     * Provides the user a formatted menu for search options to choose from
     * Special handling for nested dictionaries
     * Asks for user input 'Enter the number associated with the search option: '
     * If no option is selected, the function will provide a default search option for 'Name'
 2. Search for a Contact:
-    * search_contacts
+    * `search_contacts(contacts)`
     * Collects the search_key from the get_user_search_key function, then prompts the user to 'Enter the value to search for: '
     * The function iterates through all contacts' keys for the value the user provided
     * If the value is found, the contact associated with the value is appended to a 'found_contacts' list
@@ -95,22 +95,31 @@ Contact Management System is a command-line-based application to simplify the ma
     - Display Contacts
     - Display Contact Info
 1. Sorting Options Menu:
-    * get_user_sort_key
+    * `get_user_sort_key(contacts)`
     * 
 2. Sorting Contacts by Key:
-    * sort_contacts_by_key
+    * `sort_contacts_by_key(contacts, sort_key)`
     * 
 3. Display Contacts:
-    * display_contacts
+    * `display_contacts(contacts)`
     * 
 3. Display Contact Info:
-    * display_contact_info
+    * `display_contact_info(info, indent_level = 0)`
     * Recursively displays contact information in a user-friendly format including:
         - Indentation based on the level of nesting within the dictionary
         - Comma-separated items from list values
 
 ### Export/Import Contacts to a Text File (ImportExport.py):
-* 
+* There are 3 parts to this feature:
+    - Export Contacts to a Text File
+    - Import Contacts from a Text File
+    - Merge Contact Information
+1. Export Contacts to a Text File:
+    * `export_contacts_to_text(contacts)`
+2. Import Contacts from a Text File:
+    * `import_contacts_from_text(contacts = None)`
+3. Merge Contact Information:
+    * `merge_contacts(existing_contact, new_info)`
 
 ### Backup Files (Backup.py):
 * 
