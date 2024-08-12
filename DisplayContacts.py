@@ -6,10 +6,6 @@
     # Recursively displays contact's info and applies indentations for nested info based on the level of nesting, making the display more user-friendly
 
 
-# 5. Display All Contacts
-# Display each contact and all details
-# *BONUS* Implement sorting options to display contacts alphabetically or other criteria
-
 def get_user_sort_key(contacts):
     # Generate sorting options dynamically based on the first contact's keys
     if contacts:

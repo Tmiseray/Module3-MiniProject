@@ -6,14 +6,7 @@
     # Handles validation and formatting for user inputs that are phone numbers, emails, and birthdates
 
 
-
 from ValidateFormat import *
-
-
-# 1. Add a New Contact
-# unique  identifier: {{Name: name}, {Phone Number: number}, {Email Address: email@example.com}, {Additional Info: info here}}
-# *BONUS* category groups (friends, family, work) can belong to multiple groups {Category: [cat1, cat2]}
-# *BONUS* Allow users to define custom fields for contacts (e.g., birthdays, anniversaries) and store this information.
 
 
 def add_new_contact(contacts):
@@ -44,7 +37,7 @@ def add_new_contact(contacts):
                 else:
                     values = input(f"\nEnter {outer_key} (comma-separated, or leave blank for none): ").split(',')
                     unique_values = list(set(val.strip() for val in values if val.strip()))
-                    new_contact[outer_key] = unique_values if unique_values else None
+                    new_contact[outer_key] = unique_values if unique_values else 'None'
 
             else:
                 # Single value field
@@ -73,5 +66,3 @@ def add_new_contact(contacts):
     print(f"\nNew Contact Added: '{new_contact.get('Name', 'Unnamed Contact')}'")
     print(f"With Unique ID: {new_contact_ID}")
     return contacts
-
-# TODO Attempt to add custom field, if so add custom field with default None to all other contacts

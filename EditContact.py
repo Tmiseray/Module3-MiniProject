@@ -9,11 +9,6 @@
 from ValidateFormat import *
 
 
-# 2. Edit an existing Contact
-# (name, phone number, email, etc.)
-# *BONUS* Categories (friends, family, work)
-# *BONUS* Allow users to define custom fields for contacts (e.g., birthdays, anniversaries) and store this information.
-
 def get_user_edit_key(contact_info):
     print(f"\n* Editing Options: *")
     edit_keys = {}
@@ -50,61 +45,25 @@ def edit_contact(contacts):
             if isinstance(edit_key, tuple):
                 outer_key, inner_key = edit_key
                 new_value = input(f"Enter the new information for {outer_key}: -> {inner_key}: ").strip()
-                # Validate and Format input based on 'edit_key'
-                if outer_key == 'Phone Number':
-                    if validate_phone_number(new_value):
-                        info[outer_key][inner_key] = new_value
-                    else:
-                        formatted_number = format_phone_number(new_value)
-                        if validate_phone_number(formatted_number):
-                            info[outer_key][inner_key] = formatted_number
-                        else:
-                            print("\nInvalid phone number format.")
-                            print("Please use (XXX) XXX-XXXX.")
-                            return
+                # Validate and Format input based on 'edit_key' and 'new_value'
+                if new_value:
+                    new_value = validate_and_format_input(outer_key, new_value)
+                    info[outer_key][inner_key] = new_value
                 else:
                     info[outer_key][inner_key] = new_value
             elif edit_key not in info:
                 custom_key = input("Enter the name of the custom field: ").strip()
                 custom_value = input(f"Enter the information for {custom_key}: ").strip()
-                # TODO when adding custom field, ensure all other ocntacts are updated with field and None as default value
                 for contact in contacts.values():
                     if custom_key not in contact:
                         contact[custom_key] = 'None'
-
                 info[custom_key] = custom_value
             else:
                 new_value = input(f"Enter the new information for {edit_key}: ").strip()
-                # Validate and Format input based on 'edit_key'
-                if edit_key == 'Phone Number':
-                    if validate_phone_number(new_value):
-                        info[edit_key] = new_value
-                    else:
-                        formatted_number = format_phone_number(new_value)
-                        if validate_phone_number(formatted_number):
-                            info[edit_key] = formatted_number
-                        else:
-                            print("\nInvalid phone number format.")
-                            print("Please use (XXX) XXX-XXXX.")
-                            return
-                elif edit_key == 'Email Address':
-                    if validate_email(new_value):
-                        info[edit_key] = new_value
-                    else:
-                        print("\nInvalid email address format.")
-                        print("Please try again.")
-                        return
-                elif edit_key == 'Birthday':
-                    if validate_birthday(new_value):
-                        info[edit_key] = new_value
-                    else:
-                        formatted_birthday = format_birthday(new_value)
-                        if validate_birthday(formatted_birthday):
-                            info[edit_key] = formatted_birthday
-                        else:
-                            print("\nInvalid birthday format.")
-                            print("Please use YYYY-MM-DD.")
-                            return
+                # Validate and Format input based on 'edit_key' and 'new_value'
+                if new_value:
+                    new_value = validate_and_format_input(edit_key, new_value)
+                    info[edit_key] = new_value
                 else:
                     info[edit_key] = new_value
 
@@ -116,7 +75,6 @@ def edit_contact(contacts):
     return contacts
 
 
-# 3. Delete a Contact
 def delete_contact(contacts):
     user_input = input("\nEnter the name of the contact you would like to delete: ")
     contact_found = False

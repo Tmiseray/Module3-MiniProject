@@ -1,5 +1,4 @@
-# Backup and Restore (Bonus): Add features to create automatic backups of contact data and the ability to restore data from a backup file.
-
+# Backup Functions
 
 import os
 

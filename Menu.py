@@ -5,21 +5,6 @@
     # Based on user input, calls to functions in other modules
     # Once user selects 'Quit', provides a friendly closing and automatically creates a backup file for the contacts
 
-# Menu with the following options:
-# Menu:
-# 1. Add a new contact
-# 2. Edit an existing contact
-# 3. Delete a contact
-# 4. Search for a contact
-# 5. Display all contacts
-# 6. Export contacts to a text file
-# 7. Import contacts from a text file *BONUS*
-# 8. Quit
-
-# Utilize input() to enable users to select menu options and provide contact details
-# Implement input validation using regular expressions (regex) to ensure correct formatting of contact information
-# Apply error handling using try, except, else, and finally blocks to manage unexpected issues during execution
-
 
 from AddContact import *
 from Search import search_contacts

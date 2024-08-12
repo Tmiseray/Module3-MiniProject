@@ -9,9 +9,6 @@ from AddContact import *
 from ValidateFormat import *
 from DisplayContacts import display_contact_info
 
-# 4. Search for a Contact
-# Search for contact and display details
-# *BONUS* allow options for search by name, phone number, email, or additional information
 
 def get_user_search_key(contacts):
     # Generate search options dynamically based on the first contact's keys

@@ -14,8 +14,7 @@
 
 import re
 
-# 6. Export Contacts to a Text File
-# Export to text file in a structured format
+
 def export_contacts_to_text(contacts):
     try:
         with open('Contacts.txt', 'w') as file:
@@ -36,10 +35,6 @@ def export_contacts_to_text(contacts):
 
     return contacts
 
-
-
-# 7. Import Contacts from a Text File *BONUS*
-# Import contacts from a text file and add them to the system
 
 def import_contacts_from_text(contacts = None):
     if contacts is None:

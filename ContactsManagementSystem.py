@@ -1,9 +1,7 @@
-# Display Welcome message
 # Welcome to the Contact Management System! 
 
 
 from ImportExport import import_contacts_from_text
-# from Backup import create_contacts_backup
 from Menu import menu
 
 
