@@ -1,4 +1,15 @@
 # Import/Export Functions
+# Including:
+    # Exporting to a text file in a structured, user-friendly format
+        # Ensures to 'write' the file vs 'append' ensuring there are no duplicated contacts
+    # Importing contacts from a text file and adding them to the system
+        # Using REGEX for patterns to match for proper import into contacts
+        # Using an additonal merge function to ensure there are not duplicated contacts
+        # Exceptions for error handling that may occur
+        # Returns full contacts after the import
+    # Merge function that handles any existing contacts and new information to be added to the contact
+        # Adds any new information and merges any existing fields with new data
+        # Returns the existing contact information
 
 
 import re
@@ -19,9 +30,11 @@ def export_contacts_to_text(contacts):
                     else:
                         file.write(f"{key}: {value}\n")
                 file.write("\n")
-        print("Contacts successfully exported to 'Contacts.txt'.")
+        print("\nContacts successfully exported to 'Contacts.txt'.")
     except Exception as e:
         print(f"An error occurred: {e}")
+
+    return contacts
 
 
 
@@ -115,6 +128,9 @@ def merge_contacts(existing_contact, new_info):
             else:
                 existing_contact[key].extend([v for v in value if v not in existing_contact[key]])
         else:
-            existing_contact[key] = value
+            if key in existing_contact and existing_contact[key] is None:
+                existing_contact[key] = value
+            else:
+                return
 
     return existing_contact        

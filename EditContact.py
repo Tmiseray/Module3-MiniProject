@@ -1,5 +1,9 @@
 # Edit Functions
 # Including:
+    # Edit key based on the contact's information keys(including nested keys) and providing an additional option for a custom field
+    # Handles validation based on edit key and formatting for phone numbers, emails, and birthdates
+    # Handling nested dictionary keys/tuples to ensure values are updated for the proper nested type
+    # Delete contact function
 
 
 from ValidateFormat import *
@@ -26,6 +30,7 @@ def get_user_edit_key(contact_info):
             print(f"{option_number}. {outer_key}")
             edit_keys[str(option_number)] = outer_key
             option_number += 1
+    print(f"{option_number}. Custom Field")
 
     choice = input("Enter the number associated with the editing option: ").strip()
 
@@ -33,9 +38,12 @@ def get_user_edit_key(contact_info):
 
 
 def edit_contact(contacts):
-    user_input = input("\nEnter the name of the contact to edit: ")
+    user_input = input("\nEnter the name of the contact to edit: ").strip()
+    contact_found = False
+
     for contact_id, info in contacts.items():
         if info['Name'].lower() == user_input.lower():
+            contact_found = True
             print(f"\n* Editing Contact: {user_input} *")
             edit_key = get_user_edit_key(info)
 
@@ -56,9 +64,17 @@ def edit_contact(contacts):
                             return
                 else:
                     info[outer_key][inner_key] = new_value
+            elif edit_key not in info:
+                custom_key = input("Enter the name of the custom field: ").strip()
+                custom_value = input(f"Enter the information for {custom_key}: ").strip()
+                # TODO when adding custom field, ensure all other ocntacts are updated with field and None as default value
+                for contact in contacts.values():
+                    if custom_key not in contact:
+                        contact[custom_key] = 'None'
+
+                info[custom_key] = custom_value
             else:
                 new_value = input(f"Enter the new information for {edit_key}: ").strip()
-
                 # Validate and Format input based on 'edit_key'
                 if edit_key == 'Phone Number':
                     if validate_phone_number(new_value):
@@ -93,10 +109,11 @@ def edit_contact(contacts):
                     info[edit_key] = new_value
 
             print(f"\nContact '{info['Name']}' has been updated.")
-            return
-        else:
+            break
+
+    if not contact_found:
             print("\nContact not found.")
-            return
+    return contacts
 
 
 # 3. Delete a Contact
@@ -106,8 +123,10 @@ def delete_contact(contacts):
         if info['Name'].lower() == user_input.lower():
             del contacts[contact_id]
             print(f"\nContact: {user_input} has been deleted from contacts.")
+            return contacts
         else:
             print(f"\nContact: {user_input} does not exist in contacts.")
+            return
 
 
 

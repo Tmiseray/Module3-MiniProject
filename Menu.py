@@ -1,3 +1,10 @@
+# Menu Function
+# Includes:
+    # CLI Menu with a user-friendly format
+    # Error handling for user input
+    # Based on user input, calls to functions in other modules
+    # Once user selects 'Quit', provides a friendly closing and automatically creates a backup file for the contacts
+
 # Menu with the following options:
 # Menu:
 # 1. Add a new contact
@@ -18,7 +25,7 @@ from AddContact import *
 from Search import search_contacts
 from DisplayContacts import display_contacts
 from ImportExport import import_contacts_from_text, export_contacts_to_text
-from Backup import restore_contacts_backup
+from Backup import *
 from EditContact import edit_contact, delete_contact
 
 
@@ -56,15 +63,18 @@ def menu(contacts):
             elif choice == 5:
                 display_contacts(contacts)
             elif choice == 6:
-                export_contacts_to_text(contacts)
+                contacts = export_contacts_to_text(contacts)
             elif choice == 7:
                 contacts = import_contacts_from_text(contacts)
             elif choice == 8:
                 contacts = restore_contacts_backup()
             elif choice == 9:
                 print("\nThank you for using Contact Management System!")
-                return contacts
+                if contacts:
+                    create_contacts_backup(contacts)
+                    break
+                return
             else:
                 print("\nInvalid choice. Please try again.")
-
+    return
 
